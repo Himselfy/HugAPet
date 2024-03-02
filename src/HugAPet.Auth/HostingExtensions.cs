@@ -15,7 +15,8 @@ internal static class HostingExtensions
     {
         builder.Services.AddRazorPages();
 
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        var configurationConnectionString = builder.Configuration.GetConnectionString("Configuration");
+        var operationalConnectionString = builder.Configuration.GetConnectionString("Operational");
 
         var isBuilder = builder.Services
             .AddIdentityServer(options =>
@@ -33,7 +34,7 @@ internal static class HostingExtensions
             .AddConfigurationStore(options =>
             {
                 options.ConfigureDbContext = b =>
-                    b.UseSqlite(connectionString, dbOpts => dbOpts.MigrationsAssembly(typeof(Program).Assembly.FullName));
+                    b.UseNpgsql(configurationConnectionString, dbOpts => dbOpts.MigrationsAssembly(typeof(Program).Assembly.FullName));
             })
             // this is something you will want in production to reduce load on and requests to the DB
             //.AddConfigurationStoreCache()
@@ -42,7 +43,7 @@ internal static class HostingExtensions
             .AddOperationalStore(options =>
             {
                 options.ConfigureDbContext = b =>
-                    b.UseSqlite(connectionString, dbOpts => dbOpts.MigrationsAssembly(typeof(Program).Assembly.FullName));
+                    b.UseNpgsql(operationalConnectionString, dbOpts => dbOpts.MigrationsAssembly(typeof(Program).Assembly.FullName));
             });
 
         builder.Services.AddAuthentication()

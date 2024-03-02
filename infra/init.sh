@@ -3,7 +3,7 @@
 # Function to setup hosts
 setup_hosts() {
     local HOST_IP="127.0.0.1"
-    local DOMAINS=("auth.local" "postgres.local" "pgadmin.local" "rabbit.local" "mail.local")
+    local DOMAINS=("auth.local" "postgres.local" "pgadmin.local" "rabbit.local" "mail.local" "api.local")
 
     for DOMAIN in "${DOMAINS[@]}"; do
         local HOST_ENTRY="$HOST_IP $DOMAIN"
