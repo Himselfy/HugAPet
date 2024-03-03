@@ -3,7 +3,7 @@
 # Function to setup hosts
 setup_hosts() {
     local HOST_IP="127.0.0.1"
-    local DOMAINS=("auth.local" "postgres.local" "pgadmin.local" "rabbit.local" "mail.local" "api.local")
+    local DOMAINS=("auth.local" "postgres.local" "pgadmin.local" "rabbit.local" "mail.local" "api.local" "ui.local" )
 
     for DOMAIN in "${DOMAINS[@]}"; do
         local HOST_ENTRY="$HOST_IP $DOMAIN"
@@ -48,8 +48,9 @@ install_mkcert() {
 generate_certificate() {
     local cert_name="local"
     if [ ! -f "${cert_name}.pem" ] || [ ! -f "${cert_name}-key.pem" ]; then
-        mkcert -cert-file "certs/${cert_name}.pem" -key-file "certs/${cert_name}-key.pem" "*.local" localhost 127.0.0.1 ::1
+        mkcert -cert-file "certs/${cert_name}.pem" -key-file "certs/${cert_name}-key.pem" "*.local" "ui.local" "auth.local" "pgadmin.local" "mail.local" "postgres.local" "api.local" localhost 127.0.0.1 ::1
         echo "Certificate and key have been generated with names ${cert_name}.pem and ${cert_name}-key.pem"
+        mkcert --install
     else
         echo "Certificate already exists."
     fi

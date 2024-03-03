@@ -14,8 +14,6 @@ public static class Config
     public static IEnumerable<ApiScope> ApiScopes =>
         new ApiScope[]
         {
-            new ApiScope("scope1"),
-            new ApiScope("scope2"),
         };
 
     public static IEnumerable<Client> Clients =>
@@ -24,13 +22,18 @@ public static class Config
             // m2m client credentials flow client
             new Client
             {
-                ClientId = "m2m.client",
-                ClientName = "Client Credentials Client",
-
-                AllowedGrantTypes = GrantTypes.ClientCredentials,
-                ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
-
-                AllowedScopes = { "scope1" }
+                ClientId = "blazor.ui.client",
+                ClientName = "HugAPet Blazor Client",
+                AllowedGrantTypes = GrantTypes.Code,
+                //ClientSecrets = { new Secret("vHWoriDBcbpHOgsWKtkWYQ==".Sha256()) },
+                RequireClientSecret = false,
+                RequirePkce = true,
+                AllowAccessTokensViaBrowser = true,
+                AllowOfflineAccess = true,
+                AllowedScopes = { "openid", "profile" },
+                AllowedCorsOrigins = { "https://ui.local" },
+                RedirectUris =  { "https://ui.local/authentication/login-callback" },
+                PostLogoutRedirectUris = { "https://ui.local/authentication/logout-callback" },
             },
 
             // interactive client using code flow + pkce
@@ -41,7 +44,7 @@ public static class Config
 
                 AllowedGrantTypes = GrantTypes.Code,
 
-                RedirectUris = { "https://localhost:44300/signin-oidc" },
+                RedirectUris = { "https://ui.local/signin-oidc" },
                 FrontChannelLogoutUri = "https://localhost:44300/signout-oidc",
                 PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
 

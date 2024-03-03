@@ -13,6 +13,16 @@ internal static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("default", policy =>
+            {
+                policy.WithOrigins()
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+        });
         builder.Services.AddRazorPages();
 
         var configurationConnectionString = builder.Configuration.GetConnectionString("Configuration");
