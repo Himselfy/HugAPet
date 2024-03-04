@@ -23,7 +23,7 @@ internal static class HostingExtensions
                     .AllowAnyMethod();
             });
         });
-        builder.Services.AddRazorPages();
+        builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
         var configurationConnectionString = builder.Configuration.GetConnectionString("Configuration");
         var operationalConnectionString = builder.Configuration.GetConnectionString("Operational");
