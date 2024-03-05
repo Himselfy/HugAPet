@@ -14,42 +14,34 @@ public static class Config
     public static IEnumerable<ApiScope> ApiScopes =>
         new ApiScope[]
         {
+            new ApiScope("user.management", "User management API"),
+            new ApiScope("auth.service", "Auth service API"),
         };
+
 
     public static IEnumerable<Client> Clients =>
         new Client[]
         {
-            // m2m client credentials flow client
             new Client
             {
                 ClientId = "blazor.ui.client",
                 ClientName = "HugAPet Blazor Client",
                 AllowedGrantTypes = GrantTypes.Code,
-                //ClientSecrets = { new Secret("vHWoriDBcbpHOgsWKtkWYQ==".Sha256()) },
                 RequireClientSecret = false,
                 RequirePkce = true,
                 AllowAccessTokensViaBrowser = true,
                 AllowOfflineAccess = true,
-                AllowedScopes = { "openid", "profile" },
+                AllowedScopes = { "openid", "profile", "user.management" },
                 AllowedCorsOrigins = { "https://ui.local" },
                 RedirectUris =  { "https://ui.local/authentication/login-callback" },
                 PostLogoutRedirectUris = { "https://ui.local/authentication/logout-callback" },
             },
-
-            // interactive client using code flow + pkce
             new Client
             {
-                ClientId = "interactive",
-                ClientSecrets = { new Secret("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
-
-                AllowedGrantTypes = GrantTypes.Code,
-
-                RedirectUris = { "https://ui.local/signin-oidc" },
-                FrontChannelLogoutUri = "https://localhost:44300/signout-oidc",
-                PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
-
-                AllowOfflineAccess = true,
-                AllowedScopes = { "openid", "profile", "scope2" }
+                ClientId = "user.management.client",
+                ClientSecrets = { new Secret("secret".Sha256()) },
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                AllowedScopes = { "auth.service" }
             },
         };
 }
