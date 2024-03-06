@@ -1,8 +1,4 @@
 using Duende.IdentityServer;
-using HugAPet.Auth;
-using HugAPet.Auth.Pages.Admin.ApiScopes;
-using HugAPet.Auth.Pages.Admin.Clients;
-using HugAPet.Auth.Pages.Admin.IdentityScopes;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -78,11 +74,6 @@ internal static class HostingExtensions
 
             builder.Services.Configure<RazorPagesOptions>(options =>
                 options.Conventions.AuthorizeFolder("/Admin", "admin"));
-
-            builder.Services.AddTransient<HugAPet.Auth.Pages.Portal.ClientRepository>();
-            builder.Services.AddTransient<ClientRepository>();
-            builder.Services.AddTransient<IdentityScopeRepository>();
-            builder.Services.AddTransient<ApiScopeRepository>();
         }
         
         // if you want to use server-side sessions: https://blog.duendesoftware.com/posts/20220406_session_management/

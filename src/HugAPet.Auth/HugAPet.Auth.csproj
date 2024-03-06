@@ -21,4 +21,30 @@
 		<Folder Include="wwwroot\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Pages\Admin\ApiScopes\Edit.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Admin\ApiScopes\Index.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Admin\ApiScopes\New.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Admin\Clients\Edit.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Admin\Clients\Index.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Admin\Clients\New.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Admin\IdentityScopes\Edit.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Admin\IdentityScopes\Index.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Admin\IdentityScopes\New.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Admin\Index.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Ciba\All.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Ciba\Consent.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Ciba\Index.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Ciba\_ScopeListItem.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Consent\Index.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Consent\_ScopeListItem.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Device\Index.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Device\Success.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Device\_ScopeListItem.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Diagnostics\Index.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Grants\Index.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Portal\Index.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\ServerSideSessions\Index.cshtml" />
+	</ItemGroup>
+
 </Project>
