@@ -47,4 +47,8 @@
 	  <_ContentIncludedByDefault Remove="Pages\ServerSideSessions\Index.cshtml" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\HugAPet.API.Client\HugAPet.API.Client.csproj" />
+	</ItemGroup>
+
 </Project>

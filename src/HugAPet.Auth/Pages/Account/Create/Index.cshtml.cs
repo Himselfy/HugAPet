@@ -5,6 +5,7 @@ using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Test;
+using HugAPet.API.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,18 +19,19 @@ public class Index : PageModel
 {
     private readonly TestUserStore _users;
     private readonly IIdentityServerInteractionService _interaction;
+    private readonly HugAPetApiClient _apiClient;
 
     [BindProperty]
     public InputModel Input { get; set; } = default!;
 
     public Index(
-        IIdentityServerInteractionService interaction,
-        TestUserStore? users = null)
+        IIdentityServerInteractionService interaction, HugAPetApiClient apiClient, TestUserStore? users = null)
     {
         // this is where you would plug in your own custom identity management library (e.g. ASP.NET Identity)
         _users = users ?? throw new InvalidOperationException("Please call 'AddTestUsers(TestUsers.Users)' on the IIdentityServerBuilder in Startup or remove the TestUserStore from the AccountController.");
             
         _interaction = interaction;
+        _apiClient = apiClient;
     }
 
     public IActionResult OnGet(string? returnUrl)
@@ -78,7 +80,13 @@ public class Index : PageModel
         if (ModelState.IsValid)
         {
             var user = _users.CreateUser(Input.Username, Input.Password, Input.Name, Input.Email);
-
+            var appUser = await _apiClient.RegisterAsync(new RegisterUser()
+            {
+                Email = Input.Email,
+                FirstName = Input.Name,
+                LastName = Input.Name,
+                Username = Input.Username
+            });
             // issue authentication cookie with subject ID and username
             var isuser = new IdentityServerUser(user.SubjectId)
             {

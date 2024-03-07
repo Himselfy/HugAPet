@@ -19,7 +19,7 @@
         </PackageReference>
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
         <PackageReference Include="Scrutor" Version="4.2.2" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
         <PackageReference Include="WolverineFx" Version="1.20.1" />
     </ItemGroup>
 
@@ -28,5 +28,16 @@
         <Link>.dockerignore</Link>
       </Content>
     </ItemGroup>
+    <Target Name="OpenAPI" AfterTargets="Build" Condition="$(Configuration)=='Debug'">
+        <PropertyGroup>
+            <ProjectName>$(MSBuildProjectName)</ProjectName>
+        </PropertyGroup>
+        <PropertyGroup>
+            <OpenApiOutputDir>$(MSBuildProjectDirectory)/../../docs/openapi</OpenApiOutputDir>
+        </PropertyGroup>
+        <MakeDir Directories="$(OpenApiOutputDir)" />
+        <Exec Command="dotnet swagger tofile --output $(OpenApiOutputDir)/$(ProjectName).json $(TargetPath) v1" WorkingDirectory="$(TargetDir)" ContinueOnError="true" />
+    </Target>
+
 
 </Project>

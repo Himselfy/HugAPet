@@ -41,6 +41,6 @@ public class RegisterUserEndpoint : IEndpoint
 {
     public void Register(IEndpointRouteBuilder builder)
     {
-        builder.MapPost("/issues/create", (RegisterUser body, IMessageBus bus) => bus.InvokeAsync(body));
+        builder.MapPost("/user-management/register", (RegisterUser body, IMessageBus bus) => bus.InvokeAsync<Guid>(body));
     }
 }

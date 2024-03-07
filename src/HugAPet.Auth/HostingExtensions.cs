@@ -1,4 +1,5 @@
 using Duende.IdentityServer;
+using HugAPet.API.Client;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -84,6 +85,7 @@ internal static class HostingExtensions
         //builder.Services.Configure<RazorPagesOptions>(options =>
         //    options.Conventions.AuthorizeFolder("/ServerSideSessions", "admin"));
 
+        builder.Services.AddApiClient(builder.Configuration["Clients:Api:Url"]);
         return builder.Build();
     }
     
