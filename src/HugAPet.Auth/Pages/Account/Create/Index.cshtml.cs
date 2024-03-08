@@ -83,8 +83,8 @@ public class Index : PageModel
             var appUser = await _apiClient.RegisterAsync(new RegisterUser()
             {
                 Email = Input.Email,
-                FirstName = Input.Name,
-                LastName = Input.Name,
+                FirstName = Input.FirstName,
+                LastName = Input.LastName,
                 Username = Input.Username
             });
             // issue authentication cookie with subject ID and username
