@@ -5,7 +5,7 @@ Welcome to HugAPet - a platform connecting pet shelters, animal lovers, and lost
 ## Table of Contents
 - [About](#about)
 - [Features](#features)
-- [Infrastructure](#infrastructure)
+- [Architecture](#architecture)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -22,18 +22,22 @@ HugAPet is designed to streamline the process of connecting pet shelters with po
 - **User Profiles:** Users can create profiles to save favorite animals, track adoption requests, and manage donations.
 - **Notifications:** Users receive notifications about animals matching their preferences or updates from shelters they follow.
 
-## Infrastructure
-The HugAPet platform is built using modern cloud technologies, including:
-- **Monitoring and Logging:** TODO
-- **CI/CD:** TODO
+## Architecture
+The HugAPet application  will follow simplified approach at first.
+There will be only one project with vertical slices for specific modules. As feature will be implemented architecture will be changed to reflect specific modules according to their complexity. 
 
+
+Current state is:
+- API Project: HugAPet.API ( Vertical slices + Minimal Api)
+- HugAPet.Auth: Auth Server build on top of Identity Server
+- HugAPet.UI: Blazor frontend 
 
 ## Usage
 To run the HugAPet portal locally for development:
 1. Clone this repository.
 2. Run /infrastructure/init.sh to register certs & hosts
 3. Run /infra/docker/docker-compose.yml 
-4. Access the application in your browser at `https://hugapet.local`.
+4. Access the application in your browser at `https://ui.local`.
 
 
 ## Contributing
