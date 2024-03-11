@@ -80,13 +80,8 @@ public class Index : PageModel
         if (ModelState.IsValid)
         {
             var user = _users.CreateUser(Input.Username, Input.Password, Input.Name, Input.Email);
-            var appUser = await _apiClient.RegisterAsync(new RegisterUser()
-            {
-                Email = Input.Email,
-                FirstName = Input.FirstName,
-                LastName = Input.LastName,
-                Username = Input.Username
-            });
+            var appUser = await _apiClient.RegisterAsync(new RegisterUser
+                (null, Input.Email, Input.FirstName, Input.LastName, Input.Username));
             // issue authentication cookie with subject ID and username
             var isuser = new IdentityServerUser(user.SubjectId)
             {
